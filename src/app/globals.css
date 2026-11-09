@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #faf9f6;
+  --color-bg-alt: #eef0f6;
+  --color-surface: #ffffff;
+  --color-border: #dce1ea;
+  --color-ink: #292d32;
+  --color-ink-soft: #59616d;
+  --color-ink-strong: #0b1f62;
+  --color-navy: #0b1f62;
+  --color-navy-dark: #081747;
+  --color-gold: #c9a227;
+  --color-gold-light: #e7cf7f;
+  --color-on-navy: #faf9f6;
+
+  --font-heading: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, "Segoe UI", Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+    color: var(--color-ink-strong);
+  }
+}
+
+/* Custom chevron rotation for the FAQ <details> elements */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/* Gentle on-scroll reveal, applied via the <Reveal> component.
+   Falls back to fully visible with no motion if the user prefers reduced motion. */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Refined gold surface: a soft brushed-metal gradient instead of a flat fill,
+   used for the primary gold call-to-action buttons. */
+.gold-surface {
+  background-image: linear-gradient(
+    180deg,
+    var(--color-gold-light) 0%,
+    var(--color-gold) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    0 1px 2px rgba(8, 23, 71, 0.08),
+    0 10px 22px -10px rgba(201, 162, 39, 0.55);
+}
+.gold-surface:hover {
+  background-image: linear-gradient(
+    180deg,
+    var(--color-gold-light) 0%,
+    var(--color-gold-light) 100%
+  );
+}
